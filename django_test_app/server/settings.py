@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 import tempfile
 from pathlib import Path
 
@@ -36,7 +36,13 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
+vercel_url = os.environ.get('VERCEL_URL')
+if vercel_url:
+    ALLOWED_HOSTS.append(vercel_url)
 
+vercel_prod_url = os.environ.get('VERCEL_PROJECT_PRODUCTION_URL')
+if vercel_prod_url:
+    ALLOWED_HOSTS.append(vercel_prod_url)
 # Application definition
 
 INSTALLED_APPS = [
